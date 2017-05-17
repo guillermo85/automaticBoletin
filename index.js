@@ -23,11 +23,27 @@ var array = JSON.stringify(json1.CVE_Items);
 
 for(var item of json1.CVE_Items) {
      //console.log('item: ', JSON.stringify(item));
-     if( typeof item.CVE_impact.CVE_impact_cvssv3.bm !== 'undefined' ){
+     /* Utilizar moment.js para comparar fechas
+     if( typeof item.CVE_reference_data[0] !== 'undefined' ){
+     	if (item.CVE_reference_data[0].publish_date ){
+     		console.log('Riesgo:', JSON.stringify(item.CVE_impact.CVE_impact_cvssv3.bm.score));
+     	}     	
+     } 
+     */
+     /*if( typeof item.CVE_impact.CVE_impact_cvssv3.bm !== 'undefined' ){
      	if (item.CVE_impact.CVE_impact_cvssv3.bm.score > 4){
      		console.log('Riesgo:', JSON.stringify(item.CVE_impact.CVE_impact_cvssv3.bm.score));
      	}     	
-     }     
+     }*/
+     if( typeof item.CVE_affects.CVE_vendor.CVE_vendor_data[0] !== 'undefined' ){
+     	var corps = ['microsoft','linux','oracle','apache','','redhat'];
+     	for(var itcorp of corps) {
+     		if (item.CVE_affects.CVE_vendor.CVE_vendor_data[0].CVE_vendor_name = itcorp){
+	     		console.log('Fabricante:', JSON.stringify(item));
+	     	}
+     	}    	     	
+     }
+     
   }
 /*
 for(var exKey in obj) {

@@ -18,10 +18,26 @@ download(url, 'vulns').then(() => {
 fs.createReadStream('./vulns/cve.zip').pipe(unzip.Extract({ path: './vulns' }));
 */
 
-var obj = JSON.parse(fs.readFileSync('cve.json', 'utf8'));
-var items = obj.CVE_Items;
-console.log(items);
+var json1 = JSON.parse(fs.readFileSync('cve.json', 'utf8'));
+var array = JSON.stringify(json1.CVE_Items);
 
+for(var item of json1.CVE_Items) {
+     //console.log('item: ', JSON.stringify(item));
+     if( typeof item.CVE_impact.CVE_impact_cvssv3.bm !== 'undefined' ){
+     	if (item.CVE_impact.CVE_impact_cvssv3.bm.score > 4){
+     		console.log('Riesgo:', JSON.stringify(item.CVE_impact.CVE_impact_cvssv3.bm.score));
+     	}     	
+     }     
+  }
+/*
+for(var exKey in obj) {
+      console.log("key:"+exKey+", value:"+exjson[exKey]);
+ }
+ 
+ 
+
+console.log(obj);
+*/
 /*
 //Cargo archivo de json a variable, cargar solamente array que nos interesa: CVE_Items
 //Para cada objeto del array solamente dejar los de riesgo CVSSv3 mayores a 4  //CVE_impact > CVE_impact_cvssv3 > score

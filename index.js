@@ -67,7 +67,8 @@ for (var item of json1.CVE_Items) {
 }
 
 var resultadoFinal = JSON.stringify(addResults);
-console.log(resultadoFinal);
+console.log(resultadoFinal); //muestra el final y lo guarda en un archivo local, luego ese puede ser tomado por un html para mostrarse o alterarse
+fs.writeFile('myjsonfile.json', resultadoFinal, 'utf8');
 
 // FILTRO DE FABRICANTE
 		         /*
